@@ -4,11 +4,10 @@
         <div class="row">
         <div class="col-12 d-flex justify-content-start align-items-start p-3"> 
         <form>
-            <input v-model="inputText" type="text" id="inputField" placeholder="Type here" class="form-control">
-            <button class="btn btn-primary" @click="search"> Search</button>
+            <input v-model="inputText" type="text" id="inputField" @input="search" placeholder="Search for items here" class="form-control">
+    
         </form>
       
-
         </div>
 
   </div>
@@ -18,18 +17,21 @@
 </template>
 
 <script>
+import { toRefs, ref, watch } from "vue";
+
 export default {
   name: "SearchBar",
-  data() {
-    return {
-      inputText: "",
-    };
-  },
+  emits: ["search"],
+  setup(props, { emit }) {
+    const inputText = ref("");
 
-  methods: {
-    search() {
-      this.$emit("search", this.inputText);
-    },
+    const search = () => {
+      emit("search", inputText.value);
+    };
+    return {
+      inputText,
+      search,
+    };
   },
 };
 </script>

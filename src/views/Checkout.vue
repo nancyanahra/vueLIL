@@ -52,13 +52,26 @@
 </template>
 
 <script>
+import { toRefs, ref, watch } from "vue";
 import Curr from "@/components/Curr";
 export default {
+  name: "Checkout",
   props: ["cart", "cartTotal"],
   components: {
     Curr,
   },
   emits: ["addItem", "deleteItem"],
+  setup(props, { emit }) {
+    const { cart, cartTotal } = toRefs(props);
+
+    const addItem = (index) => {
+      emit("deleteItem", index);
+    };
+
+    const deleteItem = (index) => {
+      emit("deleteItem", index);
+    };
+  },
 };
 </script>
 

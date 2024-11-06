@@ -20,12 +20,21 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import Curr from "@/components/Curr";
 export default {
-  props: ["item"],
+  name: "Product",
   emits: ["addItem"],
-  components: {
-    Curr,
-  },
+  props: ["item"],
+  components: { Curr },
 };
+
+// import Curr from "@/components/Curr";
+// export default {
+//   props: ["item"],
+//   emits: ["addItem"],
+//   components: {
+//     Curr,
+//   },
+// };
 </script>

@@ -32,7 +32,8 @@ export default {
     fetch("https://hplussport.com/api/products/order/price")
       .then((response) => response.json())
       .then((data) => {
-        this.products = data;
+        // this.products = data;
+        this.products = this.categorizeProducts(data);
       });
   },
   methods: {
@@ -59,6 +60,31 @@ export default {
       } else {
         this.cart.splice(id, 1);
       }
+    },
+
+    categorizeProducts(products) {
+      return products.map((product) => {
+        let category = "";
+        if (
+          /shirt|tank|jacket|jeans|vest|coat|pullover|sweater|pants/i.test(
+            product.name
+          )
+        ) {
+          category = "Clothing";
+        } else if (/water|strawberry|mineral|kitchen/i.test(product.name)) {
+          category = "Food & Beverage";
+        } else if (/capsules|tablets|mg|vitamin|caplets/i.test(product.name)) {
+          category = "Supplements";
+        }
+
+        return { ...product, category };
+        // return {
+        //   id: product.id,
+        //   name: product.name,
+        //   price: product.price,
+        //   category: category,
+        // };
+      });
     },
   },
   computed: {
