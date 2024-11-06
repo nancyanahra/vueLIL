@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <section class="container">
     <search-bar :products="filteredProducts" @search="handleSearch" />

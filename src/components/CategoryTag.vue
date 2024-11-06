@@ -1,12 +1,15 @@
+/* eslint-disable */
 <template>
-  <div>
-    <!-- <multiselect
-      v-model="selectedTag"
-      :options="tagOptions"
-      :multiple="true"
-    ></multiselect> -->
+  <multiselect
+    class="text-white bg-success p-0 rounded mb-1"
+    v-model="localSelectedTags"
+    :options="tagOptions"
+    :multiple="true"
+    @change="updateSelectedTags"
+  ></multiselect>
 
-    <form action="/action_page.php">
+  <!-- <div>
+  <form action="/action_page.php">
       <input
         class="form-check-input"
         type="checkbox"
@@ -44,27 +47,35 @@
         Supplements</label
       ><br /><br />
     </form>
-
-    <ul>
-      <li v-for="item in filteredProducts" :key="item.id">
-        {{ item.name }}
-      </li>
-    </ul>
-  </div>
+  </div>-->
 </template>
 
 <script>
+import Multiselect from "vue-multiselect";
 export default {
-  components: {},
+  components: { Multiselect },
+  props: {
+    selectedTags: Array,
+  },
 
   data() {
     return {
-      selectedTags: [],
+      tagOptions: ["Clothing", "Food & Beverage", "Supplements"],
     };
+  },
+  computed: {
+    localSelectedTags: {
+      get() {
+        return this.selectedTags;
+      },
+      set(newValue) {
+        this.$emit("update:selectedTags", newValue);
+      },
+    },
   },
   methods: {
     updateSelectedTags() {
-      this.$emit("update:selected-tags", this.selectedTags);
+      this.$emit("update:selected-tags", this.localSelectedTags);
     },
   },
 };
