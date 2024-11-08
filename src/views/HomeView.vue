@@ -5,6 +5,7 @@
     <category-tag
       :selected-tags="selectedTags"
       @update:selected-tags="updateTags"
+      style="width: 100%"
     />
     <range-selector :products="filteredProducts" v-model="max" />
 

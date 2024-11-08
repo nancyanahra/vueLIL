@@ -1,11 +1,15 @@
 /* eslint-disable */
 <template>
+  <label class="typo__label">Filter by Tags</label>
   <multiselect
     class="text-white bg-success p-0 rounded mb-1"
     v-model="localSelectedTags"
     :options="tagOptions"
+    :option-height="104"
     :multiple="true"
+    placeholder="Search or add a tag"
     @change="updateSelectedTags"
+    :style="{ '--multiselect-input-width': '150px' }"
   ></multiselect>
 
   <!-- <div>
